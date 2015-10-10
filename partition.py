@@ -9,12 +9,22 @@
 # Пример выходных данных:
 # 3
 
-def partition(number):
-    answer = set()
-    answer.add((number, ))
-    for x in range(1, number):
-        for y in partition(number - x):
-            answer.add(tuple(sorted((x, ) + y)))
-    return answer
+def partision(n, termsNum):
+    a = [0 for i in range(n + 1)]
+    k = 1
+    a[1] = n
+    while k != 0:
+        x = a[k - 1] + 1
+        y = a[k] - 1
+        k -= 1
+        while x <= y:
+            a[k] = x
+            y -= x
+            k += 1
+        a[k] = x + y
+        p = a[:k + 1]
+        if len(p) == termsNum:
+            yield p
 
-print(partition(6))
+for i in partision(10, 3):
+    print(i)

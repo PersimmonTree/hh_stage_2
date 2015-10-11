@@ -10,6 +10,7 @@
 # 3
 
 def partision(n, termsNum):
+    counter = 0
     a = [0 for i in range(n + 1)]
     k = 1
     a[1] = n
@@ -24,7 +25,8 @@ def partision(n, termsNum):
         a[k] = x + y
         p = a[:k + 1]
         if len(p) == termsNum:
-            yield p
+            #yield p
+            counter += 1
+    return counter
 
-for i in partision(10, 3):
-    print(i)
+print(partision(6, 3))

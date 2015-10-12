@@ -5,6 +5,18 @@
 # Представьте это выражение в развёрнутом виде, например: 3x^4 - 15x^3 - 9x^2 + 45x
 
 import sympy
+import re
 
-s = "(x - 5) * (2 * x ** 3 + x * (x ** 2 - 9))"
+s = "(x - 5)(2x^3 + x(x^2 - 9))"
+
+s = re.sub("\)\(", ") * (", s)
+
+s = re.sub("\^", " ** ", s)
+
+s = re.sub("x\(", "x * (", s)
+
+s = re.sub('(\d)(x)', lambda m: m.group(1) + " * " + m.group(2), s)
+
+print(s)
+
 print(sympy.expand(s))

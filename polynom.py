@@ -9,7 +9,16 @@ import re
 
 s = "(a - 5)(2a^3 + a(a^2 - 9))"
 
+def varCounter(s):
+    vars = []
+    for c in s:
+        if c.isalpha() and c not in vars:
+            vars.append(c)
+    return len(vars)
+
 def normalizer(s):
+    if varCounter(s) != 1:
+        raise Exception("Больше одной переменной в выражении")
     s.lower()
     s = re.sub("\)\(", ") * (", s)
     s = re.sub("\^", " ** ", s)
@@ -17,6 +26,5 @@ def normalizer(s):
     s = re.sub('(\d)([a-z])', lambda m: m.group(1) + " * " + m.group(2), s)
     return s
 
-s = normalizer(s)
-
-print(sympy.expand(s))
+# s = normalizer(s)
+# print(sympy.expand(s))

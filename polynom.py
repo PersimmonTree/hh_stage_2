@@ -52,7 +52,7 @@ def main(args = None):
         s = sympy.expand(s)
     except SyntaxError:
         print("Выражение не может быть приведено к стандартному виду.")
-        return -1
+        return -2
 
     print(prettify(str(s)))
     return 0

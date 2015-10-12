@@ -9,6 +9,8 @@
 # Пример выходных данных:
 # 3
 
+import sys
+
 def partision(n, termsNum):
     counter = 0
     a = [0 for i in range(n + 1)]
@@ -25,8 +27,16 @@ def partision(n, termsNum):
         a[k] = x + y
         p = a[:k + 1]
         if len(p) == termsNum:
-            #yield p
             counter += 1
     return counter
 
-print(partision(6, 3))
+def main(argv=None):
+    n = int(input("Введите число для которого требуется вычислить количество разбиений: "))
+    termsNum = int(input("Введите количество слагаемых в каждом разбиении: "))
+    result = partision(n, termsNum)
+    print("Существует %d разбиенией(я) числа %d на %d слагаемых." % (result, n, termsNum))
+    return 0
+
+if __name__ == '__main__':
+    status = main()
+    sys.exit(status)

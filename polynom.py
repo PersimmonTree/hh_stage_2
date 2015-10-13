@@ -30,7 +30,7 @@ def normalize(s):
         s.lower()
         s = re.sub("\)\(", ") * (", s)
         s = re.sub("\^", " ** ", s)
-        s = re.sub("([a-z])(\()", lambda m: m.group(1) + " * " + m.group(2), s)
+        s = re.sub("([a-z0-9])(\()", lambda m: m.group(1) + " * " + m.group(2), s)
         s = re.sub('(\d)([a-z])', lambda m: m.group(1) + " * " + m.group(2), s)
     return s
 

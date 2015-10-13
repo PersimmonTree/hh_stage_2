@@ -1,8 +1,7 @@
+import getopt
 import sys
 import sympy
 import re
-
-s = "(a - 5)(2a^3 + a(a^2 - 9))"
 
 def normalize(s):
 
@@ -32,9 +31,26 @@ def prettify(s):
     s = re.sub("\*", "", s)
     return s
 
-def main(args = None):
+def usage():
+    print("Usage..........")
 
-    s = input("Введите выражение, которое требуется привести к стандартному виду: ")
+def main(argv):
+
+    _filePath = None
+
+    try:
+        opts, args = getopt.getopt(argv, "h:f:", ["help", "filePath="])
+    except getopt.GetoptError:
+        usage()
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            usage()
+            sys.exit(2)
+        elif opt in ("-f", "--filePath"):
+            _filePath = arg
+
+    s = argv[0]
 
     try:
         s = normalize(s)
@@ -49,8 +65,22 @@ def main(args = None):
         return -2
 
     print(prettify(str(s)))
+
+    if _filePath:
+        with open(_filePath, 'r') as file:
+            for line in file:
+                try:
+                    line = normalize(line)
+                except ValueError as errorMessage:
+                    print(errorMessage)
+                try:
+                    s = sympy.expand(s)
+                except SyntaxError:
+                    print("Выражение не может быть приведено к стандартному виду.")
+                print(prettify(str(s)))
+
     return 0
 
 if __name__ == '__main__':
-    status = main()
+    status = main(sys.argv[1:])
     sys.exit(status)

@@ -23,7 +23,7 @@ def main(argv=None):
     n = int(input("Введите число для которого требуется вычислить количество разбиений: "))
     termsNum = int(input("Введите количество слагаемых в каждом разбиении: "))
     result = partision(n, termsNum)
-    print("Существует %d разбиенией(я) числа %d на %d слагаемых." % (result, n, termsNum))
+    print("Существует %d разбиений(я) числа %d на %d слагаемых." % (result, n, termsNum))
     return 0
 
 if __name__ == '__main__':

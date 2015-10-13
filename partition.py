@@ -19,11 +19,31 @@ def partision(n, termsNum):
             counter += 1
     return counter
 
-def main(argv=None):
-    n = int(input("Введите число для которого требуется вычислить количество разбиений: "))
-    termsNum = int(input("Введите количество слагаемых в каждом разбиении: "))
+def main():
+
+    while True:
+        n = input("Введите число для которого требуется вычислить количество разбиений: ")
+        try:
+            n = int(n)
+        except ValueError:
+            print("Введенная строка не является числом.")
+        else:
+            break
+
+    termsNum = input("Введите количество слагаемых в каждом разбиении: ")
+
+    while True:
+        try:
+            termsNum = int(termsNum)
+        except ValueError:
+            print("Введенная строка не является числом.")
+        else:
+            break
+
     result = partision(n, termsNum)
+
     print("Существует %d разбиений(я) числа %d на %d слагаемых." % (result, n, termsNum))
+
     return 0
 
 if __name__ == '__main__':

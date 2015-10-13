@@ -32,51 +32,59 @@ def prettify(s):
     return s
 
 def usage():
-    print("Usage..........")
+    print("Usage: polynom.py"
+          "[-h, --help]"
+          "[-e string=value, --expression string=value]"
+          "[-f path=value, --filePath path=value]")
 
 def main(argv):
 
+    _expression = None
     _filePath = None
 
     try:
-        opts, args = getopt.getopt(argv, "h:f:", ["help", "filePath="])
+        opts, args = getopt.getopt(argv, "he:f:", ["help", "expression=" ,"filePath="])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
+
     for opt, arg in opts:
         if opt in ("-h", "--help"):
             usage()
             sys.exit(2)
+        elif opt in ("-e", "--expression"):
+            _expression = arg
         elif opt in ("-f", "--filePath"):
             _filePath = arg
 
-    s = argv[0]
+    if _expression:
+        try:
+            s = normalize(_expression)
+        except ValueError as errorMessage:
+            print(errorMessage)
+            return -1
 
-    try:
-        s = normalize(s)
-    except ValueError as errorMessage:
-        print(errorMessage)
-        return -1
+        try:
+            s = sympy.expand(s)
+        except SyntaxError:
+            print("Выражение не может быть приведено к стандартному виду.")
+            return -2
 
-    try:
-        s = sympy.expand(s)
-    except SyntaxError:
-        print("Выражение не может быть приведено к стандартному виду.")
-        return -2
-
-    print(prettify(str(s)))
+        print(prettify(str(s)))
 
     if _filePath:
         with open(_filePath, 'r') as file:
             for line in file:
                 try:
-                    line = normalize(line)
+                    s = normalize(line)
                 except ValueError as errorMessage:
                     print(errorMessage)
+
                 try:
                     s = sympy.expand(s)
                 except SyntaxError:
                     print("Выражение не может быть приведено к стандартному виду.")
+
                 print(prettify(str(s)))
 
     return 0

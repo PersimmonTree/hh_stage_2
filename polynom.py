@@ -1,3 +1,11 @@
+#!/usr/bin/env python3.4
+
+# -*- coding: utf-8 -*-
+
+"""
+Module docstring.
+"""
+
 import getopt
 import sys
 import sympy

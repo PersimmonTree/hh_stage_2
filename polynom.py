@@ -1,10 +1,10 @@
-#!/usr/bin/env python3.4
+#!/usr/bin/python3
 
 # -*- coding: utf-8 -*-
 
 """
 Данная программа приводит алгебраическое выражение к стандартному виду.
-Допускается выражения из командной строки и из файла (построчно).
+Допускается ввод выражения из командной строки и из файла (построчно).
 
 Примеры использования:
     >> python3 polynom.py -e "(x-1)(x^2 - 2)*(x ** 4 + 3x + 2)"
@@ -12,10 +12,10 @@
     >> python3 polynom.py --help
 """
 
-import getopt
 import sys
-import sympy
+import getopt
 import re
+import sympy
 
 def normalize(s):
 

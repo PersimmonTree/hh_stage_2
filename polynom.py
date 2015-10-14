@@ -93,13 +93,13 @@ def main(argv):
                     s = normalize(line)
                 except ValueError as errorMessage:
                     print(errorMessage)
-
-                try:
-                    s = sympy.expand(s)
-                except SyntaxError:
-                    print("Выражение не может быть приведено к стандартному виду.")
-
-                print(prettify(str(s)))
+                else:
+                    try:
+                        s = sympy.expand(s)
+                    except SyntaxError:
+                        print("Выражение не может быть приведено к стандартному виду.")
+                    else:
+                        print(prettify(str(s)))
 
     return 0
 

@@ -3,7 +3,13 @@
 # -*- coding: utf-8 -*-
 
 """
-Module docstring.
+Данная программа приводит алгебраическое выражение к стандартному виду.
+Допускается выражения из командной строки и из файла (построчно).
+
+Примеры использования:
+    >> python3 polynom.py -e "(x-1)(x^2 - 2)*(x ** 4 + 3x + 2)"
+    >> python3 polynom.py --filePath "test.txt"
+    >> python3 polynom.py --help
 """
 
 import getopt
